@@ -1,6 +1,7 @@
-FROM python:2.7-alpine3.7
+FROM ubuntu
 MAINTAINER wware@alum.mit.edu
-RUN apk update
-RUN apk add python2-tkinter
+RUN apt update -y
+RUN apt install -y apt-utils
+RUN apt install -y python2.7 python-tk gnucap libgnucap0 gwave
 COPY ./tryit.py /bin/tryit.py
-CMD tryit.py
+COPY osc.ckt /osc.ckt
