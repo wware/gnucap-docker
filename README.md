@@ -1,4 +1,4 @@
-= Making X Windows work for a Docker container
+# Making X Windows work for a Docker container
 
 https://stackoverflow.com/questions/49169055
 
