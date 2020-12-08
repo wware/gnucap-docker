@@ -46,12 +46,12 @@ class OscilloscopeViewControls(tk.Frame):
         # We'll use the flexible pack layout manager
         self.pack()
 
-        self.slider1 = tk.Scale(self, from_=0, to=300, showvalue=False,
+        self.slider1 = tk.Scale(self, from_=0, to=2, resolution=0.1, showvalue=False,
                                 orient=tk.HORIZONTAL, length=WIDTH, command=self.update_gnuplot)
-        self.slider1.set(0.5 * WIDTH)
-        self.slider2 = tk.Scale(self, from_=0, to=200, showvalue=False,
+        self.slider1.set(1)
+        self.slider2 = tk.Scale(self, from_=-6, to=0, showvalue=False, resolution=0.5,
                                 orient=tk.HORIZONTAL, length=WIDTH, command=self.update_gnuplot)
-        self.slider2.set(0.5 * WIDTH)
+        self.slider2.set(-3)
 
         # The go button
         self.quit_button = tk.Button(self,
@@ -73,8 +73,8 @@ class OscilloscopeViewControls(tk.Frame):
         dx = self.slider2.get()
         if dx < 1:
             dx = 1
-        center = 1. * self.slider1.get() / WIDTH + 0.5
-        span = 1. * dx / WIDTH
+        center = 1. * self.slider1.get()
+        span = 10. ** self.slider2.get()
         self._gcp.run("set xrange [{0}:{1}]".format(center - span, center + span))
         self._gcp.run("plot \"z\" using 1:7 with lines")
 
