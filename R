@@ -1,0 +1,5 @@
+get "timer.ckt"
+print tran v(nodes)
+store tran v(*)
+opt numdgt=8
+tran 0 0.05 .00001 trace all > data

@@ -1,0 +1,11 @@
+dumb little circuit
+
+.INCLUDE timer555.mod
+
+RL 4 0 100k 
+Valim 5 0 dc 10
+X1 0 2 4 5 3 2 1 5 TLC555 
+C2 0 3 10nF IC=0 
+C1 0 2 100nF IC=0 
+RA 1 5 4.7k 
+RB 2 1 5.6k
