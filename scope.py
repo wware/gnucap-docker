@@ -29,8 +29,10 @@ class GnuplotChildProcess(object):
 WIDTH = 300
 
 class OscilloscopeViewControls(tk.Frame):
-    def __init__(self, master, gcp):
-        self._gcp = gcp
+    def __init__(self, fname):
+        self.master = master = tk.Tk()
+        self._gcp = GnuplotChildProcess()
+        self._fname = fname
 
         # Initialize window using the parent's constructor
         tk.Frame.__init__(self,
@@ -76,12 +78,11 @@ class OscilloscopeViewControls(tk.Frame):
         center = 1. * self.slider1.get()
         span = 10. ** self.slider2.get()
         self._gcp.run("set xrange [{0}:{1}]".format(center - span, center + span))
-        self._gcp.run("plot \"z\" using 1:7 with lines")
+        self._gcp.run("plot \"{0}\" using 1:7 with lines".format(self._fname))
 
     def run(self):
         ''' Run the app '''
         self.mainloop()
 
-gcp = GnuplotChildProcess()
-app = OscilloscopeViewControls(tk.Tk(), gcp)
+app = OscilloscopeViewControls('z')
 app.run()
